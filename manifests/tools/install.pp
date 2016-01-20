@@ -16,6 +16,10 @@ class riemann::tools::install {
     }
   }
 
+  package{'zlib1g-dev':
+    ensure  => present
+  } ->
+
   package { [
       'riemann-client',
       'riemann-tools',
