@@ -1,3 +1,4 @@
+# health setup
 class riemann::tools::config {
   $health_enabled = $riemann::tools::health_enabled
   $net_enabled = $riemann::tools::net_enabled
@@ -7,25 +8,8 @@ class riemann::tools::config {
 
   case $::osfamily {
     'Debian': {
-      file { '/etc/init.d/riemann-health':
-        ensure => link,
-        target => '/lib/init/upstart-job',
-      }
-
-      file { '/etc/init/riemann-health.conf':
-        ensure  => present,
-        content => template('riemann/etc/init/riemann-health.conf.erb'),
-      }
-
-      file { '/etc/init.d/riemann-net':
-        ensure => link,
-        target => '/lib/init/upstart-job',
-      }
-
-      file { '/etc/init/riemann-net.conf':
-        ensure  => present,
-        content => template('riemann/etc/init/riemann-net.conf.erb'),
-      }
+      riemann::systemd {'riemann-health': }
+      riemann::systemd {'riemann-net': }
     }
     'RedHat', 'Amazon': {
       $gem_path = $riemann::params::gem_path

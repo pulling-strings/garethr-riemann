@@ -1,0 +1,10 @@
+
+[Unit]
+Description=Riemann Server
+After=network.target
+
+[Service]
+User=<%= @user %>
+ExecStart=/opt/riemann/bin/riemann <%= @config_file %>
+Restart=on-failure
+RestartSec=60

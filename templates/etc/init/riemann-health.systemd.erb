@@ -1,0 +1,10 @@
+
+[Unit]
+Description=Riemann Health
+After=network.target
+
+[Service]
+User=<%= @health_user %>
+ExecStart= /usr/local/bin/riemann-health
+Restart=on-failure
+RestartSec=60

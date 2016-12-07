@@ -1,0 +1,9 @@
+[Unit]
+Description=Riemann Dashboard
+After=network.target
+
+[Service]
+User=<%= @user %>
+ExecStart= /usr/local/bin/riemann-dash  /etc/riemann-dash.rb
+Restart=on-failure
+RestartSec=60

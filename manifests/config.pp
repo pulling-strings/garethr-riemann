@@ -1,3 +1,4 @@
+# Configure service
 class riemann::config {
   $host = $riemann::host
   $port = $riemann::port
@@ -6,15 +7,7 @@ class riemann::config {
 
   case $::osfamily {
     'Debian': {
-      file { '/etc/init.d/riemann':
-        ensure => link,
-        target => '/lib/init/upstart-job',
-      }
-
-      file { '/etc/init/riemann.conf':
-        ensure  => present,
-        content => template('riemann/etc/init/riemann.conf.erb')
-      }
+      riemann::systemd {'riemann': }
     }
     'RedHat', 'Amazon': {
       file { '/etc/init.d/riemann':

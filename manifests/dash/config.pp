@@ -1,3 +1,4 @@
+# Dash configration
 class riemann::dash::config {
   $host = $riemann::dash::host
   $port = $riemann::dash::port
@@ -6,15 +7,7 @@ class riemann::dash::config {
 
   case $::osfamily {
     'Debian': {
-      file { '/etc/init.d/riemann-dash':
-        ensure => link,
-        target => '/lib/init/upstart-job',
-      }
-
-      file { '/etc/init/riemann-dash.conf':
-        ensure  => present,
-        content => template('riemann/etc/init/riemann-dash.conf.erb'),
-      }
+      riemann::systemd{'riemann-dash':}
     }
     'RedHat', 'Amazon': {
       $gem_path = $riemann::params::gem_path
@@ -31,4 +24,5 @@ class riemann::dash::config {
     ensure  => present,
     content => template('riemann/etc/riemann-dash.rb.erb'),
   }
+
 }

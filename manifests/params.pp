@@ -13,7 +13,7 @@ class riemann::params {
 
   case $::osfamily {
     'Debian': {
-      $service_provider = upstart
+      $service_provider = systemd
       $libxml_package = 'libxml2-dev'
       $libxslt_package = 'libxslt1-dev'
     }

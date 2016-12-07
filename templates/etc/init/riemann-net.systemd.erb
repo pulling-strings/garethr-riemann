@@ -1,0 +1,10 @@
+
+[Unit]
+Description=Riemann Net
+After=network.target
+
+[Service]
+User=<%= @net_user %>
+ExecStart= /usr/local/bin/riemann-net
+Restart=on-failure
+RestartSec=60
