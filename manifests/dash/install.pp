@@ -1,3 +1,4 @@
+# Install dash
 class riemann::dash::install {
   include gcc
 
@@ -12,5 +13,10 @@ class riemann::dash::install {
     ensure   => installed,
     require  => Class['gcc'],
     provider => gem,
+  }
+
+  file{'/var/lib/riemann-dash':
+    ensure => directory,
+    owner  => $riemann::dash::user
   }
 }
